@@ -2,14 +2,14 @@
 
  
 ## Design flow  
-for each N in N_set:
+`for each N in N_set:
     For each M from 0 to N:
         1. Generate parameterized Verilog module using N and M
-           → Save to: `./design_modules/`
+           → Save to: ./design_modules/
 
         2. Create a new Vivado project
-           → Project name: `mn_adder_N<N>M<M>`
-           → Directory: `./design_sweep_runs/mn_adder_N<N>M<M>/`
+           → Project name: mn_adder_N<N>M<M>
+           → Directory: ./design_sweep_runs/mn_adder_N<N>M<M>/
 
         3. Add generated source files to the project and set top module
 
@@ -33,4 +33,4 @@ for each N in N_set:
                 report_timing_summary
 
         7. Close the project and clean up intermediate files
-
+`
