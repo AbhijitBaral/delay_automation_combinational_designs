@@ -2,7 +2,8 @@
 
  
 ## Design flow  
-`for each N in N_set:
+```
+for each N in N_set:
     For each M from 0 to N:
         1. Generate parameterized Verilog module using N and M
            → Save to: ./design_modules/
@@ -33,4 +34,4 @@
                 report_timing_summary
 
         7. Close the project and clean up intermediate files
-`
+```
