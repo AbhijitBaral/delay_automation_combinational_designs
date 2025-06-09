@@ -4,8 +4,8 @@
 #set K [expr {$N-$M}]
 
 set top_module "mn_adder_wrapper"
-set part_name "xc7a12tcpg238-3"
-set N_List {16}
+set part_name "xc7a200tlffv1156-2L"
+set N_List {128}
 
 proc gen_modules {n m} {
 	#Generate the module descriptions in verilog and put in ./design_modules/
@@ -65,7 +65,7 @@ proc flow {m n} {
 
 # Repeat flow for each parameter set
 foreach n $N_List {
-	for {set m 16} {$m <= $n} {incr m 2} {
+	for {set m 0} {$m <= 4} {incr m 2} {
 		flow $m $n;
 	}
 }

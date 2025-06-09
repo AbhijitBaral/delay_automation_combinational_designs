@@ -1,0 +1,239 @@
+
+*** Running vivado
+    with args -log mn_adder_wrapper.vds -m64 -product Vivado -mode batch -messageDb vivado.pb -notrace -source mn_adder_wrapper.tcl
+
+
+****** Vivado v2024.2 (64-bit)
+  **** SW Build 5239630 on Fri Nov 08 22:34:34 MST 2024
+  **** IP Build 5239520 on Sun Nov 10 16:12:51 MST 2024
+  **** SharedData Build 5239561 on Fri Nov 08 14:39:27 MST 2024
+  **** Start of session at: Mon Jun  9 10:54:15 2025
+    ** Copyright 1986-2022 Xilinx, Inc. All Rights Reserved.
+    ** Copyright 2022-2024 Advanced Micro Devices, Inc. All Rights Reserved.
+
+source mn_adder_wrapper.tcl -notrace
+Command: synth_design -top mn_adder_wrapper -part xc7a12tcpg238-3
+Starting synth_design
+Attempting to get a license for feature 'Synthesis' and/or device 'xc7a12t'
+INFO: [Common 17-349] Got license for feature 'Synthesis' and/or device 'xc7a12t'
+INFO: [Synth 8-7079] Multithreading enabled for synth_design using a maximum of 7 processes.
+INFO: [Synth 8-7078] Launching helper process for spawning children vivado processes
+INFO: [Synth 8-7075] Helper process launched with PID 4031
+---------------------------------------------------------------------------------
+Starting Synthesize : Time (s): cpu = 00:00:07 ; elapsed = 00:00:07 . Memory (MB): peak = 1723.141 ; gain = 358.855 ; free physical = 141 ; free virtual = 9921
+---------------------------------------------------------------------------------
+INFO: [Synth 8-6157] synthesizing module 'mn_adder_wrapper' [/home/abhijit/Desktop/delay_automation/design_sweep_runs/mn_adder_N32M0/design_modules/adder_wrapper.v:3]
+INFO: [Synth 8-6157] synthesizing module 'mn_adder' [/home/abhijit/Desktop/delay_automation/design_sweep_runs/mn_adder_N32M0/design_modules/mn_adder.v:2]
+	Parameter N bound to: 32 - type: integer 
+	Parameter M bound to: 0 - type: integer 
+INFO: [Synth 8-6157] synthesizing module 'compressed_adder' [/home/abhijit/Desktop/delay_automation/design_sweep_runs/mn_adder_N32M0/design_modules/compressed_adder.v:2]
+	Parameter K bound to: 32 - type: integer 
+INFO: [Synth 8-6157] synthesizing module 'LUT6_2' [/home/abhijit/Xilinx/Vivado/2024.2/scripts/rt/data/unisim_comp.v:84343]
+	Parameter INIT bound to: 64'b1110000100011110100001110111100010011001100110010110011001100110 
+INFO: [Synth 8-6155] done synthesizing module 'LUT6_2' (0#1) [/home/abhijit/Xilinx/Vivado/2024.2/scripts/rt/data/unisim_comp.v:84343]
+INFO: [Synth 8-6155] done synthesizing module 'compressed_adder' (0#1) [/home/abhijit/Desktop/delay_automation/design_sweep_runs/mn_adder_N32M0/design_modules/compressed_adder.v:2]
+INFO: [Synth 8-6157] synthesizing module 'carry_compressor' [/home/abhijit/Desktop/delay_automation/design_sweep_runs/mn_adder_N32M0/design_modules/carry_compressor.v:3]
+	Parameter K bound to: 32 - type: integer 
+INFO: [Synth 8-6157] synthesizing module 'LUT6_2__parameterized0' [/home/abhijit/Xilinx/Vivado/2024.2/scripts/rt/data/unisim_comp.v:84343]
+	Parameter INIT bound to: 64'b0000000000000000000001100110000000000000000000001111101010100000 
+INFO: [Synth 8-6155] done synthesizing module 'LUT6_2__parameterized0' (0#1) [/home/abhijit/Xilinx/Vivado/2024.2/scripts/rt/data/unisim_comp.v:84343]
+INFO: [Synth 8-6157] synthesizing module 'CARRY4' [/home/abhijit/Xilinx/Vivado/2024.2/scripts/rt/data/unisim_comp.v:3092]
+INFO: [Synth 8-6155] done synthesizing module 'CARRY4' (0#1) [/home/abhijit/Xilinx/Vivado/2024.2/scripts/rt/data/unisim_comp.v:3092]
+INFO: [Synth 8-6155] done synthesizing module 'carry_compressor' (0#1) [/home/abhijit/Desktop/delay_automation/design_sweep_runs/mn_adder_N32M0/design_modules/carry_compressor.v:3]
+INFO: [Synth 8-6155] done synthesizing module 'mn_adder' (0#1) [/home/abhijit/Desktop/delay_automation/design_sweep_runs/mn_adder_N32M0/design_modules/mn_adder.v:2]
+INFO: [Synth 8-6155] done synthesizing module 'mn_adder_wrapper' (0#1) [/home/abhijit/Desktop/delay_automation/design_sweep_runs/mn_adder_N32M0/design_modules/adder_wrapper.v:3]
+WARNING: [Synth 8-3848] Net rca_sum in module/entity carry_compressor does not have driver. [/home/abhijit/Desktop/delay_automation/design_sweep_runs/mn_adder_N32M0/design_modules/carry_compressor.v:8]
+WARNING: [Synth 8-3848] Net Cout in module/entity mn_adder does not have driver. [/home/abhijit/Desktop/delay_automation/design_sweep_runs/mn_adder_N32M0/design_modules/mn_adder.v:6]
+WARNING: [Synth 8-7129] Port rca_sum[3] in module carry_compressor is either unconnected or has no load
+WARNING: [Synth 8-7129] Port rca_sum[2] in module carry_compressor is either unconnected or has no load
+WARNING: [Synth 8-7129] Port rca_sum[1] in module carry_compressor is either unconnected or has no load
+WARNING: [Synth 8-7129] Port rca_sum[0] in module carry_compressor is either unconnected or has no load
+WARNING: [Synth 8-7129] Port a_rem[3] in module carry_compressor is either unconnected or has no load
+WARNING: [Synth 8-7129] Port a_rem[2] in module carry_compressor is either unconnected or has no load
+WARNING: [Synth 8-7129] Port a_rem[1] in module carry_compressor is either unconnected or has no load
+WARNING: [Synth 8-7129] Port a_rem[0] in module carry_compressor is either unconnected or has no load
+WARNING: [Synth 8-7129] Port b_rem[3] in module carry_compressor is either unconnected or has no load
+WARNING: [Synth 8-7129] Port b_rem[2] in module carry_compressor is either unconnected or has no load
+WARNING: [Synth 8-7129] Port b_rem[1] in module carry_compressor is either unconnected or has no load
+WARNING: [Synth 8-7129] Port b_rem[0] in module carry_compressor is either unconnected or has no load
+WARNING: [Synth 8-7129] Port group_carry[15] in module compressed_adder is either unconnected or has no load
+WARNING: [Synth 8-7129] Port Cout in module mn_adder is either unconnected or has no load
+---------------------------------------------------------------------------------
+Finished Synthesize : Time (s): cpu = 00:00:09 ; elapsed = 00:00:09 . Memory (MB): peak = 1794.109 ; gain = 429.824 ; free physical = 105 ; free virtual = 9842
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Constraint Validation : Time (s): cpu = 00:00:10 ; elapsed = 00:00:10 . Memory (MB): peak = 1811.922 ; gain = 447.637 ; free physical = 105 ; free virtual = 9842
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Loading Part and Timing Information
+---------------------------------------------------------------------------------
+Loading part: xc7a12tcpg238-3
+---------------------------------------------------------------------------------
+INFO: [Device 21-403] Loading part xc7a12tcpg238-3
+Finished Loading Part and Timing Information : Time (s): cpu = 00:00:10 ; elapsed = 00:00:10 . Memory (MB): peak = 1819.926 ; gain = 455.641 ; free physical = 121 ; free virtual = 9846
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished RTL Optimization Phase 2 : Time (s): cpu = 00:00:10 ; elapsed = 00:00:10 . Memory (MB): peak = 1828.832 ; gain = 464.547 ; free physical = 113 ; free virtual = 9840
+---------------------------------------------------------------------------------
+No constraint files found.
+---------------------------------------------------------------------------------
+Start RTL Component Statistics 
+---------------------------------------------------------------------------------
+Detailed RTL Component Info : 
++---Registers : 
+	                1 Bit    Registers := 2     
+---------------------------------------------------------------------------------
+Finished RTL Component Statistics 
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Part Resource Summary
+---------------------------------------------------------------------------------
+Part Resources:
+DSPs: 40 (col length:40)
+BRAMs: 40 (col length: RAMB18 40 RAMB36 20)
+---------------------------------------------------------------------------------
+Finished Part Resource Summary
+---------------------------------------------------------------------------------
+No constraint files found.
+---------------------------------------------------------------------------------
+Start Cross Boundary and Area Optimization
+---------------------------------------------------------------------------------
+WARNING: [Synth 8-7080] Parallel synthesis criteria is not met
+WARNING: [Synth 8-7129] Port rca_sum[3] in module carry_compressor is either unconnected or has no load
+WARNING: [Synth 8-7129] Port rca_sum[2] in module carry_compressor is either unconnected or has no load
+WARNING: [Synth 8-7129] Port rca_sum[1] in module carry_compressor is either unconnected or has no load
+WARNING: [Synth 8-7129] Port rca_sum[0] in module carry_compressor is either unconnected or has no load
+WARNING: [Synth 8-7129] Port a_rem[3] in module carry_compressor is either unconnected or has no load
+WARNING: [Synth 8-7129] Port a_rem[2] in module carry_compressor is either unconnected or has no load
+WARNING: [Synth 8-7129] Port a_rem[1] in module carry_compressor is either unconnected or has no load
+WARNING: [Synth 8-7129] Port a_rem[0] in module carry_compressor is either unconnected or has no load
+WARNING: [Synth 8-7129] Port b_rem[3] in module carry_compressor is either unconnected or has no load
+WARNING: [Synth 8-7129] Port b_rem[2] in module carry_compressor is either unconnected or has no load
+WARNING: [Synth 8-7129] Port b_rem[1] in module carry_compressor is either unconnected or has no load
+WARNING: [Synth 8-7129] Port b_rem[0] in module carry_compressor is either unconnected or has no load
+WARNING: [Synth 8-7129] Port group_carry[15] in module compressed_adder is either unconnected or has no load
+WARNING: [Synth 8-7129] Port Cout in module mn_adder_wrapper is either unconnected or has no load
+---------------------------------------------------------------------------------
+Finished Cross Boundary and Area Optimization : Time (s): cpu = 00:00:16 ; elapsed = 00:00:16 . Memory (MB): peak = 1878.738 ; gain = 514.453 ; free physical = 131 ; free virtual = 9772
+---------------------------------------------------------------------------------
+No constraint files found.
+---------------------------------------------------------------------------------
+Start Timing Optimization
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Timing Optimization : Time (s): cpu = 00:00:16 ; elapsed = 00:00:16 . Memory (MB): peak = 1902.551 ; gain = 538.266 ; free physical = 121 ; free virtual = 9763
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Technology Mapping
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Technology Mapping : Time (s): cpu = 00:00:16 ; elapsed = 00:00:16 . Memory (MB): peak = 1902.551 ; gain = 538.266 ; free physical = 115 ; free virtual = 9756
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Flattening Before IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Flattening Before IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Final Netlist Cleanup
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Final Netlist Cleanup
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished IO Insertion : Time (s): cpu = 00:00:21 ; elapsed = 00:00:22 . Memory (MB): peak = 2056.363 ; gain = 692.078 ; free physical = 115 ; free virtual = 9619
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Renaming Generated Instances
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Instances : Time (s): cpu = 00:00:21 ; elapsed = 00:00:22 . Memory (MB): peak = 2056.363 ; gain = 692.078 ; free physical = 115 ; free virtual = 9619
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Rebuilding User Hierarchy
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Rebuilding User Hierarchy : Time (s): cpu = 00:00:21 ; elapsed = 00:00:22 . Memory (MB): peak = 2056.363 ; gain = 692.078 ; free physical = 115 ; free virtual = 9619
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Renaming Generated Ports
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Ports : Time (s): cpu = 00:00:21 ; elapsed = 00:00:22 . Memory (MB): peak = 2056.363 ; gain = 692.078 ; free physical = 115 ; free virtual = 9619
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Handling Custom Attributes
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Handling Custom Attributes : Time (s): cpu = 00:00:21 ; elapsed = 00:00:22 . Memory (MB): peak = 2056.363 ; gain = 692.078 ; free physical = 115 ; free virtual = 9619
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Renaming Generated Nets
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Nets : Time (s): cpu = 00:00:21 ; elapsed = 00:00:22 . Memory (MB): peak = 2056.363 ; gain = 692.078 ; free physical = 115 ; free virtual = 9619
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Writing Synthesis Report
+---------------------------------------------------------------------------------
+
+Report BlackBoxes: 
++-+--------------+----------+
+| |BlackBox name |Instances |
++-+--------------+----------+
++-+--------------+----------+
+
+Report Cell Usage: 
++------+-------+------+
+|      |Cell   |Count |
++------+-------+------+
+|1     |BUFG   |     1|
+|2     |CARRY4 |     4|
+|3     |LUT6   |    32|
+|4     |FDRE   |     2|
+|5     |IBUF   |    67|
+|6     |OBUF   |    32|
+|7     |OBUFT  |     1|
++------+-------+------+
+
+Report Instance Areas: 
++------+--------------------------+-----------------+------+
+|      |Instance                  |Module           |Cells |
++------+--------------------------+-----------------+------+
+|1     |top                       |                 |   139|
+|2     |  adder_inst              |mn_adder         |    36|
+|3     |    compressed_adder_inst |compressed_adder |    16|
+|4     |    CC_inst               |carry_compressor |    20|
++------+--------------------------+-----------------+------+
+---------------------------------------------------------------------------------
+Finished Writing Synthesis Report : Time (s): cpu = 00:00:21 ; elapsed = 00:00:22 . Memory (MB): peak = 2056.363 ; gain = 692.078 ; free physical = 115 ; free virtual = 9619
+---------------------------------------------------------------------------------
+Synthesis finished with 0 errors, 0 critical warnings and 31 warnings.
+Synthesis Optimization Runtime : Time (s): cpu = 00:00:22 ; elapsed = 00:00:22 . Memory (MB): peak = 2056.363 ; gain = 692.078 ; free physical = 115 ; free virtual = 9619
+Synthesis Optimization Complete : Time (s): cpu = 00:00:22 ; elapsed = 00:00:22 . Memory (MB): peak = 2056.371 ; gain = 692.078 ; free physical = 115 ; free virtual = 9619
+INFO: [Project 1-571] Translating synthesized netlist
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 2070.238 ; gain = 0.000 ; free physical = 267 ; free virtual = 9746
+INFO: [Netlist 29-17] Analyzing 36 Unisim elements for replacement
+INFO: [Netlist 29-28] Unisim Transformation completed in 5 CPU seconds
+INFO: [Project 1-570] Preparing netlist for logic optimization
+INFO: [Opt 31-138] Pushed 0 inverter(s) to 0 load pin(s).
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 2167.863 ; gain = 0.000 ; free physical = 179 ; free virtual = 9675
+INFO: [Project 1-111] Unisim Transformation Summary:
+  A total of 32 instances were transformed.
+  LUT6_2 => LUT6_2 (LUT5, LUT6): 32 instances
+
+Synth Design complete | Checksum: d790851c
+INFO: [Common 17-83] Releasing license: Synthesis
+26 Infos, 31 Warnings, 0 Critical Warnings and 0 Errors encountered.
+synth_design completed successfully
+synth_design: Time (s): cpu = 00:00:30 ; elapsed = 00:00:27 . Memory (MB): peak = 2167.863 ; gain = 803.586 ; free physical = 179 ; free virtual = 9675
+INFO: [Common 17-2834] synth_design peak Physical Memory [PSS] (MB): overall = 1504.962; main = 1443.933; forked = 275.802
+INFO: [Common 17-2834] synth_design peak Virtual Memory [VSS] (MB): overall = 2903.340; main = 2167.867; forked = 914.785
+Write ShapeDB Complete: Time (s): cpu = 00:00:00.01 ; elapsed = 00:00:00 . Memory (MB): peak = 2191.875 ; gain = 0.000 ; free physical = 179 ; free virtual = 9675
+INFO: [Common 17-1381] The checkpoint '/home/abhijit/Desktop/delay_automation/design_sweep_runs/mn_adder_N32M0/mn_adder_N32M0.runs/synth_1/mn_adder_wrapper.dcp' has been generated.
+INFO: [Vivado 12-24828] Executing command : report_utilization -file mn_adder_wrapper_utilization_synth.rpt -pb mn_adder_wrapper_utilization_synth.pb
+INFO: [Common 17-206] Exiting Vivado at Mon Jun  9 10:54:50 2025...
