@@ -1,6 +1,6 @@
 set clk_name clk;
-set start_period 4
-set end_period 10
+set start_period 0.5
+set end_period 6
 set step_period 0.1
 
 file mkdir reports;
