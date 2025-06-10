@@ -13,7 +13,7 @@ set tns 0
 
 #add_files -fileset constrs_1 $clk_constraints
 
-proc fl_rep {cp, count} {
+proc fl_rep {cp count} {
 	global clk_constraints
 	global cp
 	global tolerance

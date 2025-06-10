@@ -5,7 +5,83 @@
 
 set top_module "mn_adder_wrapper"
 set part_name "xc7a200tlffv1156-2L"
-set N_List {128}
+set N_List {32}
+
+set tolerance 0.007
+set cp 8
+
+set wns 0
+set wpws 0
+set tns 0
+
+set delay_summary [file join [pwd] delay_summary.txt]
+set fid_delay_summary [open $delay_summary "w"]
+puts $fid_delay_summary "\t\tclock_period\tWNS\tWPWS"
+close $fid_delay_summary
+
+proc fl_rep {cp count n m} {
+	global clk_constraints
+	global tolerance
+	global wns
+	global wpws
+	global tns
+	global summary
+	
+	reset_run synth_1; reset_run impl_1;
+
+	set fid_clk_constraints [open $clk_constraints "w"]
+	puts $fid_clk_constraints "create_clock -name clk -period $cp \[get_ports clk\]"
+	close $fid_clk_constraints
+	
+	remove_files -fileset constrs_1 $clk_constraints 
+	add_files -fileset constrs_1 $clk_constraints 
+	
+	launch_runs synth_1;
+	wait_on_run synth_1;
+	
+	launch_runs impl_1;
+	wait_on_run impl_1;
+	open_run impl_1;
+	
+	set timing_summary [file join [pwd] "design_sweep_runs" "mn_adder_N${n}M${m}" "reports" "timing_summary_${count}.txt"]
+	report_timing_summary -file $timing_summary
+	
+	set fid_timing_summary [open $timing_summary "r"]
+	set contents [read $fid_timing_summary]
+	close $fid_timing_summary
+	
+	regexp -lineanchor {\n\s+([-0-9.]+)\s+([-0-9.]+)\s+\d+\s+\d+\s+([-0-9.]+)} $contents -> wns tns wpws
+	
+	set fid_summary [open $summary "a"]
+	puts $fid_summary "Iteration ${count}\ncp:\t${cp}\nwns:\t${wns}\nwpws:\t${wpws}\n\n"
+	close $fid_summary
+}
+
+proc get_delay {n m} {
+	global clk_constraints
+	global cp
+	global tolerance
+	global wns
+	global wpws
+	global tns
+	global summary
+	
+	file mkdir [file join [pwd] "design_sweep_runs" "mn_adder_N${n}M${m}" "reports"]
+	
+	set clk_constraints [file join [pwd] "design_sweep_runs" "mn_adder_N${n}M${m}" "clk_constraints.xdc"]
+	set summary [file join [pwd] "design_sweep_runs" "mn_adder_N${n}M${m}" "reports" "summary.txt"]
+
+	fl_rep $cp 1 $n $m;
+	
+	set count 2
+	while {$wns >$tolerance} {
+		set cp [expr {$cp - $wns}]
+		fl_rep $cp $count $n $m
+		set count [expr {$count + 1}]
+	}
+}
+
+puts "\n\nThe operating clock pulse period is ${cp}. Corresponding WNS = ${wns} and WPWS = ${wpws}"
 
 proc gen_modules {n m} {
 	#Generate the module descriptions in verilog and put in ./design_modules/
@@ -23,6 +99,10 @@ proc gen_modules {n m} {
 proc flow {m n} {
 	global top_module
 	global part_name
+	global delay_summary
+	global cp
+	global wns
+	global wpws
 
 	puts "\nRunning synthesis for N=$n and M=$m\n"	
 
@@ -42,30 +122,18 @@ proc flow {m n} {
 	set_property top $top_module [get_fileset sources_1]
 	
 	#call delay computation function
-
-	# run synthesis
-	set status [catch {
-            launch_runs synth_1
-            wait_on_run synth_1
-
-	    launch_runs impl_1
-	    wait_on_run impl_1
-        } result]
-
-        if {$status != 0} {
-            puts "!! Synthesis failed for N=$n, M=$m"
-            puts "!! Error: $result"
-        } else {
-            puts "\nSynthesis and implementation completed successfully for N=$n, M=$m\n\n"
-        }
-        
+	get_delay $n $m
+	set fid_delay_summary [open $delay_summary "a"]
+	puts $fid_delay_summary "N${n}M${m}:  ${cp}\t${wns}\t${wpws}"
+	close $fid_delay_summary
+	set cp 8
 
         close_project
 }
 
 # Repeat flow for each parameter set
 foreach n $N_List {
-	for {set m 0} {$m <= 4} {incr m 2} {
+	for {set m 0} {$m <= 2} {incr m 2} {
 		flow $m $n;
 	}
 }
