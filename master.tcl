@@ -56,7 +56,7 @@ proc flow {m n} {
             puts "!! Synthesis failed for N=$n, M=$m"
             puts "!! Error: $result"
         } else {
-            puts "\nSynthesis completed successfully for N=$n, M=$m\n\n"
+            puts "\nSynthesis and implementation completed successfully for N=$n, M=$m\n\n"
         }
         
 
