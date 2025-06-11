@@ -1,5 +1,5 @@
 set tolerance 0.007
-set cp 8
+set cp 0.5
 file mkdir reports
 
 set clk_constraints [file join [pwd] "clk_constraints.xdc"]
@@ -55,7 +55,7 @@ proc fl_rep {cp count} {
 fl_rep $cp 1
 
 set count 2
-while {$wns >$tolerance} {
+while {$wns < 0 } {
 	set cp [expr {$cp - $wns}]
 	fl_rep $cp $count
 	set count [expr {$count + 1}]

@@ -8,7 +8,7 @@ set part_name "xc7a200tlffv1156-2L"
 set N_List {32}
 
 set tolerance 0.007
-set cp 8
+set cp 0.5
 
 set wns 0
 set wpws 0
@@ -74,7 +74,7 @@ proc get_delay {n m} {
 	fl_rep $cp 1 $n $m;
 	
 	set count 2
-	while {$wns >$tolerance} {
+	while {$wns <0} {
 		set cp [expr {$cp - $wns}]
 		fl_rep $cp $count $n $m
 		set count [expr {$count + 1}]
