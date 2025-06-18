@@ -1,10 +1,18 @@
-set top_module "mn_adder_wrapper"
-set part_name "xc7a200tlffv1156-2L"
-set proj_name "adder"
-set user_sweep {
-foreach param_N {32, 64, 96, 128, 256, 300}
-for param_M {0 to $param_N} {2}
-}
+set fid_flow_config [open [file join [pwd] flow_config] "r"]
+set content_flow_config [read $fid_flow_config]
+
+set lines_content_config [split $content_flow_config "\n"]
+
+
+set proj_name   [lindex $lines_content_config 1]
+set part_name   [lindex $lines_content_config 4]
+set top_module  [lindex $lines_content_config 7]
+set param_sweep [lrange $lines_content_config 10 [llength $lines_content_config]-1]
+
+puts $proj_name  
+puts $part_name  
+puts $top_module 
+puts $param_sweep
 
 set tolerance 0.007
 set cp 0.5
@@ -167,13 +175,12 @@ proc flow {proj_id param_dict top_module} {
 
 # Repeat flow for each parameter set
 
-set lines [split $user_sweep "\n"]
 set loop_body ""
 set dict_def "set param_dict \[dict create "
 set size 0
 set id ""
 
-foreach line $lines {
+foreach line $param_sweep {
 	if {[regexp {^foreach\s+(\w+)\s+\{(.*)\}} $line -> var list]} {
         	# Clean commas
         	regsub -all {,} $list "" clean_list
