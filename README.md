@@ -1,4 +1,4 @@
-# Automated Design Flow for performance evaluation of manually placed, parameterized Combiational circuit designs  
+# Automated Design Flow for performance evaluation of manually placed, parameterized Combinational designs on Xilinx FPGAs 
 ---
 
 ## Usage  
