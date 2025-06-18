@@ -12,10 +12,11 @@ set cp 0.5
 set wns 0
 set wpws 0
 set tns 0
+#set crit_path ""
 
 set delay_summary [file join [pwd] delay_summary.txt]
 set fid_delay_summary [open $delay_summary "w"]
-puts $fid_delay_summary "\t\tclock_period\tWNS\tWPWS"
+puts $fid_delay_summary "\t\tclock_period\tWNS\tWPWS\tCrit_path"
 close $fid_delay_summary
 
 proc fl_rep {cp count proj_id} {
@@ -152,11 +153,12 @@ proc flow {proj_id param_dict top_module} {
 	
 	#call delay computation function
 	get_delay $proj_id
+	set crit_path [get_timing_paths -max_paths 1]
 	set fid_delay_summary [open $delay_summary "a"]
 
 	puts $proj_id
 	regexp {^[^_]+_(.*)} $proj_id -> trimmed 
-	puts $fid_delay_summary "${trimmed}:  ${cp}\t${wns}\t${wpws}"
+	puts $fid_delay_summary "${trimmed}:  [format "%.3f" ${cp}]\t${wns}\t[format "%.3f" ${wpws}]\t${crit_path}"
 	close $fid_delay_summary
 	set cp 0.5
 
