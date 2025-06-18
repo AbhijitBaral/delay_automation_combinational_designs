@@ -6,10 +6,10 @@ Once all rtl/rtl generating scripts and `flow_config` are setup, call the vivado
 
 
 * Four details have to be specified in the `flow_config` file :  
-**  project name
-**  board part name
-**  top module name
-**  parameter combinations the flow is to run over  
+  *  project name
+  *  board part name
+  *  top module name
+  *  parameter combinations the flow is to run over  
 
 **Setting parameter combinations**
 The parameter combinations refer to the set of values of the parameters used in the design, for which the design is to be implemented and analyzed. In the *flow_config* file, the combinations are to be specified with loop structures in a syntax, similar to that of TCL syntax.  
