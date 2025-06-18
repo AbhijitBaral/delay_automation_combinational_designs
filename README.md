@@ -9,7 +9,25 @@ Once all rtl/rtl generating scripts and `flow_config` are setup, call the vivado
   *  project name
   *  board part name
   *  top module name
-  *  parameter combinations the flow is to run over  
+  *  parameter combinations the flow is to run over
+
+example of a config_file with project details populated at their respective places  
+```text
+########################################
+project_name: 
+adder
+########################################
+part_name:
+xc7a200tlffv1156-2L
+########################################
+top_module:
+mn_adder_wrapper
+########################################
+Iteration :
+foreach param_N {32, 64, 96, 128, 256, 300}
+for param_M {0 to $param_N} {2}
+}
+```
 
 **Setting parameter combinations**
 The parameter combinations refer to the set of values of the parameters used in the design, for which the design is to be implemented and analyzed. In the *flow_config* file, the combinations are to be specified with loop structures in a syntax, similar to that of TCL syntax.  
