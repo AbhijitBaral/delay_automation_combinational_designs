@@ -89,7 +89,7 @@ Either the verilog or tcl method is used, the files are stored inside the `rt_sr
 
 
 ## Algorithm
-
+![wq](https://github.com/AbhijitBaral/delay_automation_combinational_designs/blob/main/figs/flow_chart.svg)
 
 
 ---
@@ -166,6 +166,9 @@ Sweeps clock period to find timing-violation-free minimum clock.
 
 The clock period corresopnding to the WNS~= 0 is found by linear interpolation of wns=0. This method of iteratively interpolating, is possible because the behaviour of WNS vs clock period for a manually placed(fixed) design is linear.  
 **wns = clock_period - (Setup time + Data path Delay)**. 
+
+![ew](https://github.com/AbhijitBaral/delay_automation_combinational_designs/blob/main/figs/wns_vs_cp_1.png)
+![fwe](https://github.com/AbhijitBaral/delay_automation_combinational_designs/blob/main/figs/wns_vs_cp_2.svg)
 
 ### `fl_rep {cp count proj_id}`
 
