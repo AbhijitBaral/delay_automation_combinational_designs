@@ -9,4 +9,4 @@ mn_adder_wrapper
 
 Iteration :
 foreach param_N {32, 64, 96, 128, 256, 300}
-for param_M {10 to $param_N} {2}
+for param_M {16 to $param_N} {2}

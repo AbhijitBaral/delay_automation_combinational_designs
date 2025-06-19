@@ -1,3 +1,1 @@
 		clock_period	WNS	WPWS	Crit_path
-N32_M10:  2.756	0.000	0.672	{in_reg_reg/C --> out_reg_So_reg/D}
-N32_M12:  3.126	0.000	0.710	{in_reg_reg/C --> out_reg_So_reg/D}
