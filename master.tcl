@@ -94,7 +94,7 @@ proc fl_rep {cp count proj_id} {
 	set contents [read $fid_timing_summary]
 	close $fid_timing_summary
 	
-	regexp -lineanchor {\n\s+([-0-9.]+)\s+([-0-9.]+)\s+\d+\s+\d+\s+([-0-9.]+)} $contents -> wns tns wpws
+	regexp -lineanchor {\n\s*(-?[0-9.]+)\s+(-?[0-9.]+)(?:\s+-?[0-9.]+){6}\s+(-?[0-9.]+)} $contents -> wns tns wpws
 	
 	set fid_summary [open $summary "a"]
 	puts $fid_summary "Iteration ${count}\ncp:\t${cp}\nwns:\t${wns}\nwpws:\t${wpws}\n\n"
