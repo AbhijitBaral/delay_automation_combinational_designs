@@ -57,12 +57,20 @@ set wpws 0
 set tns 0
 
 ################################### Create and put column heading in the final delay_summary file###########################
-set delay_summary [file join [pwd] delay_summary.txt]
+file mkdir [file join [pwd] out_dir]
+
+set delay_summary [file join [pwd] out_dir delay_summary.txt]
 set fid_delay_summary [open $delay_summary "w"]
-puts $fid_delay_summary "\t\tclock_period\tWNS\tWPWS\tCrit_path"
+set header [format "%-20s %-18s %-9s %-9s %-s" "Project_id" "Clock_period(ns)" "WNS(ns)" "WPWS(ns)" "Critical_path"]
+puts $fid_delay_summary $header
 close $fid_delay_summary
 
-#
+set delay_summary_csv [file join [pwd] out_dir delay_summary.csv]
+set fid_delay_summary_csv [open $delay_summary_csv "w"]
+puts $fid_delay_summary_csv "project_id,clock_period,WNS,WPWS,Critical_path"
+close $fid_delay_summary_csv
+
+################################### Function needed in get_delay function ####################################################
 proc fl_rep {cp count proj_id} {
 	global clk_constraints
 	global tolerance
@@ -94,14 +102,14 @@ proc fl_rep {cp count proj_id} {
 	set contents [read $fid_timing_summary]
 	close $fid_timing_summary
 	
-	regexp -lineanchor {\n\s*(-?[0-9.]+)\s+(-?[0-9.]+)(?:\s+-?[0-9.]+){6}\s+(-?[0-9.]+)} $contents -> wns tns wpws
+	regexp {\n\s*(-?[0-9.]+)\s+(?:-?[0-9.]+\s+){3}(-?[0-9.]+)\s+(?:-?[0-9.]+\s+){3}(-?[0-9.]+)} $contents -> wns whs wpws
 	
 	set fid_summary [open $summary "a"]
-	puts $fid_summary "Iteration ${count}\ncp:\t${cp}\nwns:\t${wns}\nwpws:\t${wpws}\n\n"
+	puts $fid_summary "Iteration ${count}\ncp:\t${cp}\nwns:\t${wns}\nwpws:\t${wpws}\nwhs:\t${whs}\n\n"
 	close $fid_summary
 }
 
-#########################################Calculates the operating clock period ################################################
+#########################################Calculates the minimum operating clock period ################################################
 proc get_delay {proj_id} {
 	global clk_constraints
 	global cp
@@ -118,11 +126,22 @@ proc get_delay {proj_id} {
 
 	fl_rep $cp 1 $proj_id;
 	
-	set count 2
-	while {$wns <0} {
-		set cp [expr {$cp - $wns}]
-		fl_rep $cp $count $proj_id
-		set count [expr {$count + 1}]
+	set p_wns [expr {$cp - $wns}]
+	set p_wpws [expr {$cp - $wpws}]
+
+	if {$p_wpws > $p_wns} {
+		set cp $p_wpws
+		fl_rep $cp 2 $proj_id
+	} else {
+		set cp $p_wns
+		fl_rep $cp 2 $proj_id
+	
+		set count 3
+		while {$wns <0} {
+			set cp [expr {$cp - $wns}]
+			fl_rep $cp $count
+			set count [expr {$count + 1}]
+		}
 	}
 }
 
@@ -174,6 +193,7 @@ proc flow {proj_id param_dict top_module} {
 	#global top_module
 	global part_name
 	global delay_summary
+	global delay_summary_csv
 	global cp
 	global wns
 	global wpws
@@ -197,11 +217,16 @@ proc flow {proj_id param_dict top_module} {
 	#call delay computation function
 	get_delay $proj_id
 	set crit_path [get_timing_paths -max_paths 1]
-	set fid_delay_summary [open $delay_summary "a"]
-
 	regexp {^[^_]+_(.*)} $proj_id -> trimmed 
-	puts $fid_delay_summary "${trimmed}:  [format "%.3f" ${cp}]\t${wns}\t[format "%.3f" ${wpws}]\t${crit_path}"
+	
+	set fid_delay_summary [open $delay_summary "a"]
+	puts $fid_delay_summary [format "%-20s %-18.3f %-9.3f %-9.3f %-s" "${trimmed}:" ${cp} ${wns} ${wpws} ${crit_path}]
 	close $fid_delay_summary
+	
+	set fid_delay_summary_csv [open $delay_summary_csv "a"]
+	puts $fid_delay_summary_csv "${trimmed},[format "%.3f" ${cp}],[format "%.3f" ${wns}],[format "%.3f" ${wpws}],${crit_path}"
+	close $fid_delay_summary_csv
+	
 	set cp 0.5
 
         close_project

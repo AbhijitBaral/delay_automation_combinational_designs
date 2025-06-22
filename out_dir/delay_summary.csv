@@ -1,0 +1,2 @@
+project_id,clock_period,WNS,WPWS,Critical_path
+N32_M16,1.740,0.000,0.148,{in_reg_reg/C --> out_reg_So_reg/D}
