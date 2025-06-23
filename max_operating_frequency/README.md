@@ -69,4 +69,8 @@ Device : xa7a100tcsg324-2I
 
 
 The above experiments support the analogy between the problem of determining Tmin⁡​ and solving WNS(T) = 0, with WPWS(T) > 0 as a secondary constraint.
-The WNS curve closely follows a linear trend with slope ~1 (as expected from the WNS equation). The WPWS curve appears to be strictly increasing and smooth, with an offset linear rise.
+The WNS curve closely follows a linear trend with slope ~1 (as expected from the WNS equation). The WPWS curve appears to be strictly increasing and smooth, with an offset linear rise.  
+
+---
+Algorithm:  
+![algo](https://github.com/AbhijitBaral/delay_automation_combinational_designs/blob/main/max_operating_frequency/plots/flow_chart.drawio.png)
