@@ -1,1 +1,0 @@
-		clock_period	WNS	WPWS	Crit_path
