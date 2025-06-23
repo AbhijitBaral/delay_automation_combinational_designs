@@ -27,21 +27,25 @@ To empirically characterize whether WNS vs. Clock Period behaves linearly or non
 ---
 Design : Adder N64M34  
 Device : xc7a200tlffv1156-2L  
-
+![add](https://github.com/AbhijitBaral/delay_automation_combinational_designs/blob/main/max_operating_frequency/plots/N64M34.png)  
 
 ---
 Design : Adder N64M64  
 Device : xc7a200tlffv1156-2L  
+![adwqd](https://github.com/AbhijitBaral/delay_automation_combinational_designs/blob/main/max_operating_frequency/plots/N64M64.png)  
 
 ---
 Design : Adder N64M30  
 Device : xc7vx690t_CIVffg1930-3  
+![addwq](https://github.com/AbhijitBaral/delay_automation_combinational_designs/blob/main/max_operating_frequency/plots/N64M30.png)  
+
 
 ---
 Design : Adder N64M6  
 Device : xc7vx690t_CIVffg1930-3  
+![addwq](https://github.com/AbhijitBaral/delay_automation_combinational_designs/blob/main/max_operating_frequency/plots/N64M64.png)  
 
----
+--- 
 ```verilog
 module multiplier(
     input [7:0] A,B,
@@ -53,10 +57,12 @@ endmodule
 ```
 Design : Behavioural multiplier (Fixed Location)  
 Device : xa7a100tcsg324-2I  
+![dwe](https://github.com/AbhijitBaral/delay_automation_combinational_designs/blob/main/max_operating_frequency/plots/multiplier(fixed).png)  
 
 ---
 Design : Behavioural Multiplier (No placement constraints)  
 Device : xa7a100tcsg324-2I  
+![multFree](https://github.com/AbhijitBaral/delay_automation_combinational_designs/blob/main/max_operating_frequency/plots/Multiplier(free).png)  
 
 ---  
 
