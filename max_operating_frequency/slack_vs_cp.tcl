@@ -1,5 +1,5 @@
 set clk_name clk;
-set start_period 3.11
+set start_period 0.5
 set end_period 10
 set step_period 0.1
 
@@ -7,24 +7,20 @@ file mkdir reports;
 
 # output in txt file
 set sweep_results [file join [pwd] "reports" "sweep_results.txt"]
-#file delete -force $sweep_results
-#set fid_sweep_results [open $sweep_results "w"]
-#set header [format "%-18s %-9s %-9s %-s" "Clock_period(ns)" "WNS(ns)" "WPWS(ns)" "Critical_path"]
-#puts $fid_sweep_results $header
-#close $fid_sweep_results
+file delete -force $sweep_results
+set fid_sweep_results [open $sweep_results "w"]
+set header [format "%-18s %-9s %-9s %-s" "Clock_period(ns)" "WNS(ns)" "WPWS(ns)" "Critical_path"]
+puts $fid_sweep_results $header
+close $fid_sweep_results
 
 #Outputs in csv file
 set sweep_results_csv [file join [pwd] "reports" sweep_results.csv]
-#file delete -force $sweep_results_csv
-#set fid_sweep_results_csv [open $sweep_results_csv "w"]
-#puts $fid_sweep_results_csv "Clock_period(ns),WNS(ns),WPWS(ns),Critical_path"
-#close $fid_sweep_results_csv
+file delete -force $sweep_results_csv
+set fid_sweep_results_csv [open $sweep_results_csv "w"]
+puts $fid_sweep_results_csv "Clock_period(ns),WNS(ns),WPWS(ns),Critical_path"
+close $fid_sweep_results_csv
 
 set clk_constraints [file join [pwd] "clk_constraints.xdc"];
-
-set cp_list "clock_period = \["
-set wns_list "wns= \["
-set wpws_list "wpws= \["
 
 set count 0;
 for {set p $start_period} {$p <= $end_period + 1e-6} {set p [expr {$p+$step_period}]} {

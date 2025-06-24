@@ -33,12 +33,12 @@ if { $M == 0} {
 	append gen_dump "\n(*RLOC_ORIGIN = \"X1Y[expr {$Y_offset-1}]\" , KEEP_HIERARCHY=\"yes\"*)compressed_adder #(.K(${K})) compressed_adder_inst(.A(A\[[expr {$K-1}]:0\]), .group_carry(group_carry), .B(B\[[expr {$K-1}]:0\]), .Cin(Cin), .sum(sum\[[expr {$K-1}]:0\]));\n"
 
 	#carry_compressor
-	append gen_dump "\n(*RLOC_ORIGIN = \"X0Y${Y_offset}\" , KEEP_HIERARCHY=\"yes\"*)carry_compressor #(.K(${K})) CC_inst(.A(A\[[expr {$K-1}]:0\]),.B(B\[[expr {$K-1}]:0\]), .a_rem(), .b_rem(), .Cin(Cin), .group_carry(group_carry), .rca_sum(), .Cout(Cgen));\n"
+	append gen_dump "\n(*RLOC_ORIGIN = \"X0Y${Y_offset}\" , KEEP_HIERARCHY=\"yes\"*)carry_compressor #(.K(${K})) CC_inst(.A(A\[[expr {$K-1}]:0\]),.B(B\[[expr {$K-1}]:0\]), .a_rem(), .b_rem(), .Cin(Cin), .group_carry(group_carry), .rca_sum(), .Cout(Cout));\n"
 
 } elseif {$K == 0} {
 
 	#RCA
-	append gen_dump "\n(*RLOC_ORIGIN = \"X0Y${Y_offset}\", KEEP_HIERARCHY=\"yes\"*)RCA #(.M(${M}), .K(${K})) RCA_inst(.A(A\[[expr {$N-1}]:0\]), .B(B\[[expr {$N-1}]:0\]), .Cin(Cgen), .sum(sum\[[expr {$N-1}]:0\]), .Cout(Cout));\n"
+	append gen_dump "\n(*RLOC_ORIGIN = \"X0Y${Y_offset}\", KEEP_HIERARCHY=\"yes\"*)RCA #(.M(${M}), .K(${K})) RCA_inst(.A(A\[[expr {$N-1}]:0\]), .B(B\[[expr {$N-1}]:0\]), .Cin(Cin), .sum(sum\[[expr {$N-1}]:0\]), .Cout(Cout));\n"
 
 } else {
 
