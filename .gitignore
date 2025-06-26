@@ -3,8 +3,11 @@
 
 .Xil/
 
+flow_config
+
 #journals
 *.jou
 
 # staging directory
 design_sweep_runs/
+out_dir/

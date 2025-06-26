@@ -70,6 +70,16 @@ set fid_delay_summary_csv [open $delay_summary_csv "w"]
 puts $fid_delay_summary_csv "project_id,clock_period,WNS,WPWS,Critical_path"
 close $fid_delay_summary_csv
 
+set power_summary [file join [pwd] out_dir power_summary.csv]
+set fid_power_summary [open $power_summary "w"]
+puts $fid_power_summary "project_id,Total_On-Chip_Power(W),Dynamic_Power(W),Static_Power(W)"
+close $fid_power_summary
+
+set utilization_summary [file join [pwd] out_dir utilization_summary.csv]
+set fid_utilization_summary [open $utilization_summary "w"]
+puts $fid_utilization_summary "project_id,LUTs_Used,FlipFlops_Used,DSPs_Used,BRAMs_used,IOs_Used"
+close $fid_utilization_summary
+
 ################################### Function needed in get_delay function ####################################################
 proc fl_rep {cp count proj_id} {
 	global clk_constraints
@@ -197,7 +207,8 @@ proc flow {proj_id param_dict top_module} {
 	global cp
 	global wns
 	global wpws
-
+	global utilization_summary
+	global power_summary
 
 	#create project
 	create_project ${proj_id} [file join [pwd] design_sweep_runs ${proj_id}] -part $part_name
@@ -219,13 +230,37 @@ proc flow {proj_id param_dict top_module} {
 	set crit_path [get_timing_paths -max_paths 1]
 	regexp {^[^_]+_(.*)} $proj_id -> trimmed 
 	
+	#Extract PPA and put into the appropriate output files
 	set fid_delay_summary [open $delay_summary "a"]
 	puts $fid_delay_summary [format "%-20s %-18.3f %-9.3f %-9.3f %-s" "${trimmed}:" ${cp} ${wns} ${wpws} ${crit_path}]
 	close $fid_delay_summary
-	
 	set fid_delay_summary_csv [open $delay_summary_csv "a"]
 	puts $fid_delay_summary_csv "${trimmed},[format "%.3f" ${cp}],[format "%.3f" ${wns}],[format "%.3f" ${wpws}],${crit_path}"
 	close $fid_delay_summary_csv
+
+	report_power -file [file join [pwd] design_sweep_runs ${proj_id} reports power_report.txt]
+	set fid_power_report [open [file join [pwd] design_sweep_runs ${proj_id} reports power_report.txt] "r"]
+	set power_content [read $fid_power_report]
+	close $fid_power_report
+	regexp {Total On-Chip Power \(W\)\s+\|\s+([0-9.]+)} $power_content -> total_power
+	regexp {Dynamic \(W\)\s+\|\s+([0-9.]+)} $power_content -> dynamic_power
+	regexp {Device Static \(W\)\s+\|\s+([0-9.]+)} $power_content -> static_power
+	set fid_power_summary [open $power_summary "a"]
+	puts $fid_power_summary "${trimmed},${total_power},${dynamic_power},${static_power}"
+	close $fid_power_summary
+
+	report_utilization -file [file join [pwd] design_sweep_runs ${proj_id} reports utilization_report.txt]
+	set fid_utilization_report [open [file join [pwd] design_sweep_runs ${proj_id} reports utilization_report.txt] "r"]
+	set utilization_content [read $fid_utilization_report]
+	close $fid_utilization_report
+	regexp {Slice LUTs\s+\|\s+(\d+)} $utilization_content -> lut_count
+	regexp {Slice Registers\s+\|\s+(\d+)} $utilization_content -> ff_count
+	regexp {DSPs\s+\|\s+(\d+)} $utilization_content -> dsp_count
+	regexp {Block RAM Tile\s+\|\s+(\d+)} $utilization_content -> bram_count
+	regexp {Bonded IOB\s+\|\s+(\d+)} $utilization_content -> io_count
+	set fid_utilization_summary [open $utilization_summary "a"]
+	puts $fid_power_summary "${trimmed},${lut_count},${ff_count},${dsp_count},${bram_count},${io_count}"
+	close $fid_power_summary
 	
 	set cp 0.5
 
@@ -237,4 +272,3 @@ proc flow {proj_id param_dict top_module} {
 
 
 eval $loop_body
-

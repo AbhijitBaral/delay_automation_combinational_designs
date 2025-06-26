@@ -17,11 +17,11 @@ append gen_dump "\n    reg in_reg, out_reg_fa, out_reg_So;"
 append gen_dump "\n    wire driver_fa, driver_So;"
 
 if {$M == 0 } {
-	append gen_dump "\n    mn_adder #(.N(${N}), .M(${M}))adder_inst(.A({A\[[expr {$N-1}]:1\], in_reg}), .B(B), .Cin(Cin), .sum({driver_So, sum\[[expr {$K-2}]:0\]}), .Cout(Cout));\n"
+	append gen_dump "\n    mn_adder #(.N(${N}), .M(${M}))adder_inst(.A({A\[[expr {$N-1}]:1\], in_reg}), .a0(A\[0\]), .B(B), .Cin(Cin), .sum({driver_So, sum\[[expr {$K-2}]:0\]}), .Cout(Cout));\n"
 } elseif {$K == 0} {
-	append gen_dump "\n    mn_adder #(.N(${N}), .M(${M}))adder_inst(.A({A\[[expr {$N-1}]:1\], in_reg}), .B(B), .Cin(Cin), .sum({driver_fa, sum\[[expr {$M-2}]:0\]}), .Cout(Cout));\n"
+	append gen_dump "\n    mn_adder #(.N(${N}), .M(${M}))adder_inst(.A({A\[[expr {$N-1}]:1\], in_reg}), .a0(), .B(B), .Cin(Cin), .sum({driver_fa, sum\[[expr {$M-2}]:0\]}), .Cout(Cout));\n"
 } else {
-	append gen_dump "\n    mn_adder #(.N(${N}), .M(${M}))adder_inst(.A({A\[[expr {$N-1}]:1\], in_reg}), .B(B), .Cin(Cin), .sum({driver_fa, sum\[[expr {$N-2}]:[expr {$K}]\], driver_So, sum\[[expr {$K-2}]:0\]}), .Cout(Cout));\n"
+	append gen_dump "\n    mn_adder #(.N(${N}), .M(${M}))adder_inst(.A({A\[[expr {$N-1}]:1\], in_reg}), .a0(A\[0\]), .B(B), .Cin(Cin), .sum({driver_fa, sum\[[expr {$N-2}]:[expr {$K}]\], driver_So, sum\[[expr {$K-2}]:0\]}), .Cout(Cout));\n"
 }
 
 append gen_dump "\n    always @(posedge clk) begin"

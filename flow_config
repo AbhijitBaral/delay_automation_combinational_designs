@@ -8,5 +8,5 @@ top_module:
 mn_adder_wrapper
 
 Iteration :
-foreach param_N {196}
-for param_M {0 to $param_N} {2}
+foreach param_N {32}
+for param_M {2 to $param_N} {2}

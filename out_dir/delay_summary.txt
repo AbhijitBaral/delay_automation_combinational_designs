@@ -1,1 +1,2 @@
 Project_id           Clock_period(ns)   WNS(ns)   WPWS(ns)  Critical_path
+N32_M2:              1.874              0.000     0.282     {in_reg_reg/C --> out_reg_So_reg/D}
