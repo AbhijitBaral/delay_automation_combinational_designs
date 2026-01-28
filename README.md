@@ -113,7 +113,7 @@ Either the verilog or tcl method is used, the files are stored inside the `rt_sr
 
 ---
 
-## 📂 Directory Structure
+## Directory Structure
 
 ```text
 parent_flow_dir/
@@ -126,7 +126,7 @@ parent_flow_dir/
 
 ---
 
-## 📄 Output
+## Output
 
 Each parameter configuration results in:
 
@@ -136,7 +136,7 @@ Each parameter configuration results in:
 - Logged delay value in a master CSV or summary file
 
 ---
-## 🧪 Sample Summary Output
+## Sample Summary Output
 
 ```text
 		clock_period	WNS	WPWS
@@ -147,7 +147,7 @@ adder_N32M2:  0.46	0.00	0.28
 
 ---
 
-## 🧰 Function Reference
+## Function Reference
 
 ### `flow {proj_id param_dict top_module}`
 
@@ -201,7 +201,7 @@ Helper for `get_delay`, performs a single synth + impl + report pass.
 ---
 
 
-## 📝 Notes
+## Notes
 
 - Make sure `rtl_src_dir` is defined and contains correct RTL generators or sources.
 - `top_module`, `part_name`, and `proj_name` must be set before running.
